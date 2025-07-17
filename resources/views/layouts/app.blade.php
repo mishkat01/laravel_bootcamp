@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     @vite('resources/css/app.css')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
@@ -18,7 +19,7 @@
     </div>
 
     <!-- main -->
-<script src="{{ asset('public/backend/js/main.js') }}"></script>
+    <script src="{{ asset('backend/js/main.js') }}"></script>
 
 </body>
 
