@@ -30,10 +30,16 @@
                 <i class="fas fa-tachometer-alt text-purple-300 group-hover:text-white"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="#"
+            <a href="{{ route('user.index') }}"
                 class="flex items-center space-x-3 p-3 rounded-lg text-purple-200 hover:bg-purple-800 hover:text-white transition-all duration-200 group">
                 <i class="fas fa-users text-purple-300 group-hover:text-white"></i>
                 <span>Users</span>
+                <span class="ml-auto bg-purple-600 text-xs px-2 py-1 rounded-full">12</span>
+            </a>
+              <a href="{{ route('categories.index') }}"
+                class="flex items-center space-x-3 p-3 rounded-lg text-purple-200 hover:bg-purple-800 hover:text-white transition-all duration-200 group">
+                <i class="fas fa-users text-purple-300 group-hover:text-white"></i>
+                <span>Input Category</span>
                 <span class="ml-auto bg-purple-600 text-xs px-2 py-1 rounded-full">12</span>
             </a>
         </div>

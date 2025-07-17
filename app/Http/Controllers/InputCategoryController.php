@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\InputCategory;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class InputCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-            $user = User::get();
-            return view('user.index',compact('user'));
+        $data = InputCategory::get();
+        return view('input-category.index',compact('data'));
     }
 
     /**
