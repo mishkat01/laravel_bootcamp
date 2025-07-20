@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\InputCategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Str;;
+use Illuminate\Support\Facades\Storage;
 
 class InputCategoryController extends Controller
 {
@@ -71,24 +72,59 @@ class InputCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(InputCategory $category)
     {
-        //
+        return view('input-category.edit', compact('category'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, InputCategory $input_category)
     {
-        //
+                $validated = $request->validate([
+            'name' => 'required|string',
+            'description' => 'nullable|string',
+            'quantity' => 'nullable|integer',
+            'type' => 'required|in:Physical,Digital',
+            'is_active' => 'nullable|boolean',
+            'image' => 'nullable|image',
+            'available_on' => 'nullable|date',
+            'available_at' => 'nullable|date_format:H:i',
+            'available_datetime' => 'nullable|date',
+            'email' => 'nullable|email',
+            'url' => 'nullable|url',
+            'color' => 'nullable|string',
+            'password' => 'nullable|string',
+        ]);
+
+        if ($request->hasFile('image')) {
+            if ($input_category->image_path) {
+                Storage::delete($input_category->image_path);
+            }
+            $validated['image_path'] = $request->file('image')->store('categories');
+        }
+
+        $validated['is_active'] = $request->has('is_active');
+        $input_category->update($validated);
+
+        return redirect()->route('categories.index')->with('success', 'Updated.');
     }
 
-    /**
+        /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(InputCategory $input_category) {
+        dd($input_category);
+        if ($input_category->image_path) {
+            Storage::delete($input_category->image_path);
+        }
+        $input_category->delete();
+        return redirect()->route('categories.index')->with('success', 'Deleted.');
     }
+    
+
+
+ 
 }
