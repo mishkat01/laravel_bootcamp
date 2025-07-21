@@ -83,7 +83,7 @@ class InputCategoryController extends Controller
      */
     public function update(Request $request, InputCategory $category)
     {
-     
+
         $validated = $request->validate([
             'name' => 'required|string',
             'description' => 'nullable|string',
@@ -100,12 +100,24 @@ class InputCategoryController extends Controller
             'password' => 'nullable|string',
         ]);
 
+
+
         if ($request->hasFile('image')) {
+            // Delete previous image if it exists
             if ($category->image_path) {
-                Storage::delete($category->image_path);
+                $previousImagePath = public_path('categories/' . $category->image_path);
+                if (file_exists($previousImagePath)) {
+                    unlink($previousImagePath);
+                }
             }
-            $validated['image_path'] = $request->file('image')->store('categories');
+
+            // Store new image
+            $image = $request->file('image');
+            $imageName = Str::uuid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('categories'), $imageName);
+            $validated['image_path'] = $imageName;
         }
+
 
         $validated['is_active'] = $request->has('is_active');
         $category->update($validated);

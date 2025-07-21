@@ -18,6 +18,7 @@
                     <tr>
                         <th class="px-6 py-3">Name</th>
                         <th class="px-6 py-3">Type</th>
+                           <th class="px-6 py-3">Image</th>
                         <th class="px-6 py-3">Active</th>
                         <th class="px-6 py-3">Actions</th>
                     </tr>
@@ -36,6 +37,10 @@
                                     {{ $category->is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
                                     {{ $category->is_active ? 'Yes' : 'No' }}
                                 </span>
+                            </td>
+                              <td class="px-6 py-4">
+                                <img src="{{ asset('categories/'.$category->image_path) }}" alt="Your Image" width="80px" height="80px" class="rounded">
+                              
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex space-x-4">
