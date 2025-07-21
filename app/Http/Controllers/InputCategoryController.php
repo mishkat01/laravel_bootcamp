@@ -83,16 +83,16 @@ class InputCategoryController extends Controller
      */
     public function update(Request $request, InputCategory $category)
     {
-        dd()
+     
         $validated = $request->validate([
             'name' => 'required|string',
             'description' => 'nullable|string',
             'quantity' => 'nullable|integer',
             'type' => 'required|in:Physical,Digital',
-            'is_active' => 'nullable|boolean',
+            'is_active' => 'nullable',
             'image' => 'nullable|image',
             'available_on' => 'nullable|date',
-            'available_at' => 'nullable|date_format:H:i',
+            'available_at' => 'nullable',
             'available_datetime' => 'nullable|date',
             'email' => 'nullable|email',
             'url' => 'nullable|url',
