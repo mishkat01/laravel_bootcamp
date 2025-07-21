@@ -67,7 +67,8 @@ class InputCategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $category = InputCategory::findOrFail($id);
+        return view('input-category.show', compact('category'));
     }
 
     /**

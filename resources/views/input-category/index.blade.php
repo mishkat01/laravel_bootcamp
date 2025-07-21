@@ -46,6 +46,8 @@
                                 <div class="flex space-x-4">
                                     <a href="{{ route('categories.edit', $category) }}"
                                         class="text-blue-600 hover:underline text-sm">Edit</a>
+                                          <a href="{{ route('categories.show', $category) }}"
+                                        class="text-blue-600 hover:underline text-sm">Show</a>
 
                                     <form method="POST" action="{{ route('categories.destroy', $category) }}"
                                         onsubmit="return confirm('Are you sure?');">
