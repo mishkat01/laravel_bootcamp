@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\InputCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;;
+
 use Illuminate\Support\Facades\Storage;
 
 class InputCategoryController extends Controller
@@ -31,7 +32,7 @@ class InputCategoryController extends Controller
      */
     public function store(Request $request)
     {
-    
+
         $validated = $request->validate([
             'name' => 'required|string',
             'description' => 'nullable|string',
@@ -48,7 +49,7 @@ class InputCategoryController extends Controller
             'password' => 'nullable|string',
         ]);
 
-         if ($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = Str::uuid() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('categories'), $imageName);
@@ -75,15 +76,15 @@ class InputCategoryController extends Controller
     public function edit(InputCategory $category)
     {
         return view('input-category.edit', compact('category'));
-        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, InputCategory $input_category)
+    public function update(Request $request, InputCategory $category)
     {
-                $validated = $request->validate([
+        dd()
+        $validated = $request->validate([
             'name' => 'required|string',
             'description' => 'nullable|string',
             'quantity' => 'nullable|integer',
@@ -100,31 +101,28 @@ class InputCategoryController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            if ($input_category->image_path) {
-                Storage::delete($input_category->image_path);
+            if ($category->image_path) {
+                Storage::delete($category->image_path);
             }
             $validated['image_path'] = $request->file('image')->store('categories');
         }
 
         $validated['is_active'] = $request->has('is_active');
-        $input_category->update($validated);
+        $category->update($validated);
 
         return redirect()->route('categories.index')->with('success', 'Updated.');
     }
 
-        /**
+    /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InputCategory $input_category) {
-        dd($input_category);
-        if ($input_category->image_path) {
-            Storage::delete($input_category->image_path);
+    public function destroy(InputCategory $category)
+    {
+
+        if ($category->image_path) {
+            Storage::delete($category->image_path);
         }
-        $input_category->delete();
+        $category->delete();
         return redirect()->route('categories.index')->with('success', 'Deleted.');
     }
-    
-
-
- 
 }
