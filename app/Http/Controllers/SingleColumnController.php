@@ -21,7 +21,7 @@ class SingleColumnController extends Controller
      */
     public function create()
     {
-        return view('input_categories.create');
+        return view('input_categories_single.create');
     }
 
     /**
@@ -55,7 +55,7 @@ class SingleColumnController extends Controller
      */
     public function show(string $id)
     {
-        return view('input_categories.show', compact('inputCategory'));
+        return view('input_categories_single.show', compact('inputCategory'));
 
     }
 
@@ -64,7 +64,7 @@ class SingleColumnController extends Controller
      */
     public function edit(string $id)
     {
-           return view('input_categories.edit', compact('inputCategory'));
+           return view('input_categories_single.edit', compact('inputCategory'));
     }
 
     /**
@@ -80,7 +80,7 @@ class SingleColumnController extends Controller
 
         $inputCategory->update(['data' => $data]);
 
-        return redirect()->route('input-categories.index');
+        return redirect()->route('column.index');
     }
 
     /**
@@ -89,6 +89,6 @@ class SingleColumnController extends Controller
     public function destroy(InputSingleColumn $inputCategory)
     {
        $inputCategory->delete();
-        return redirect()->route('input-categories.index');
+        return redirect()->route('column.index');
     }
 }
