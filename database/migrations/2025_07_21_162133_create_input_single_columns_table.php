@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('input_single_columns', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->json('data')->nullable(); 
+            $table->text('value');
             $table->timestamps();
         });
     }
