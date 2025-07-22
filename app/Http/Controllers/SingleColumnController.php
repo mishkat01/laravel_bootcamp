@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InputSingleColumn;
 use Illuminate\Http\Request;
 
 class SingleColumnController extends Controller
@@ -11,7 +12,8 @@ class SingleColumnController extends Controller
      */
     public function index()
     {
-        
+        $categories = InputSingleColumn::all();
+        return view('input_categories_single.index', compact('categories'));
     }
 
     /**
@@ -19,7 +21,7 @@ class SingleColumnController extends Controller
      */
     public function create()
     {
-        //
+        return view('input_categories.create');
     }
 
     /**
@@ -27,7 +29,25 @@ class SingleColumnController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'quantity' => $request->quantity,
+            'type' => $request->type,
+            'is_active' => $request->is_active ?? true,
+            'image_path' => $request->image_path,
+            'available_on' => $request->available_on,
+            'available_at' => $request->available_at,
+            'available_datetime' => $request->available_datetime,
+            'email' => $request->email,
+            'url' => $request->url,
+            'color' => $request->color,
+            'password' => bcrypt($request->password),
+        ];
+
+        InputSingleColumn::create(['data' => $data]);
+
+        return redirect()->route('column.index');
     }
 
     /**
@@ -35,7 +55,8 @@ class SingleColumnController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('input_categories.show', compact('inputCategory'));
+
     }
 
     /**
@@ -43,22 +64,31 @@ class SingleColumnController extends Controller
      */
     public function edit(string $id)
     {
-        //
+           return view('input_categories.edit', compact('inputCategory'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, InputSingleColumn $inputCategory)
     {
-        //
+        $data = [
+            'name' => $request->name,
+            'description' => $request->description,
+            // include all other fields as in store method
+        ];
+
+        $inputCategory->update(['data' => $data]);
+
+        return redirect()->route('input-categories.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(InputSingleColumn $inputCategory)
     {
-        //
+       $inputCategory->delete();
+        return redirect()->route('input-categories.index');
     }
 }

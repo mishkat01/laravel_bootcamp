@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InputCategoryController;
+use App\Http\Controllers\SingleColumnController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -11,4 +12,5 @@ Route::get('/', function () {
 
 Route::resource('user',UserController::class);
 Route::resource('input/categories', InputCategoryController::class);
+Route::resource('input/single/column', SingleColumnController::class);
 
