@@ -86,9 +86,10 @@ class SingleColumnController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InputSingleColumn $inputCategory)
+    public function destroy(InputSingleColumn $column)
     {
-       $inputCategory->delete();
+      
+       $column->delete();
         return redirect()->route('column.index');
     }
 }

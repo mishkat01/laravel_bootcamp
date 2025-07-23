@@ -24,32 +24,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $category)
+                    @foreach ($data as $column)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                             <td class="px-6 py-4 text-gray-900 dark:text-white">
-                                {{ $category->name }}
+                                {{ $column->name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $category->type }}
+                                {{ $column->type }}
                             </td>
                             <td class="px-6 py-4">
                                 <span class="inline-block px-2 py-1 text-xs font-medium rounded 
-                                    {{ $category->is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
-                                    {{ $category->is_active ? 'Yes' : 'No' }}
+                                    {{ $column->is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                                    {{ $column->is_active ? 'Yes' : 'No' }}
                                 </span>
                             </td>
                               <td class="px-6 py-4">
-                                <img src="{{ asset('categories/'.$category->image_path) }}" alt="Your Image" width="80px" height="80px" class="rounded">
+                                <img src="{{ asset('categories/'.$column->image_path) }}" alt="Your Image" width="80px" height="80px" class="rounded">
                               
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex space-x-4">
-                                    <a href="{{ route('categories.edit', $category) }}"
+                                    <a href="{{ route('categories.edit', $column) }}"
                                         class="text-blue-600 hover:underline text-sm">Edit</a>
-                                          <a href="{{ route('categories.show', $category) }}"
+                                          <a href="{{ route('categories.show', $column) }}"
                                         class="text-blue-600 hover:underline text-sm">Show</a>
 
-                                    <form method="POST" action="{{ route('categories.destroy', $category) }}"
+                                    <form method="POST" action="{{ route('column.destroy', $column) }}"
                                         onsubmit="return confirm('Are you sure?');">
                                         @csrf
                                         @method('DELETE')
