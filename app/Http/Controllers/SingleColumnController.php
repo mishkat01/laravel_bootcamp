@@ -44,8 +44,8 @@ class SingleColumnController extends Controller
             'color' => $request->color,
             'password' => bcrypt($request->password),
         ];
-
-        InputSingleColumn::create(['data' => $data]);
+        
+        InputSingleColumn::create(['value' => (object)$data]);
 
         return redirect()->route('column.index');
     }

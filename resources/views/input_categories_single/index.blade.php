@@ -6,7 +6,7 @@
     <div class="flex-1 p-8">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold text-black-800">single column</h1>
-            <a href="{{ route('categories.create') }}"
+            <a href="{{ route('column.create') }}"
                 class="bg-black hover:bg-gray-800 text-black font-semibold py-2 px-4 rounded shadow">
                 Create New
             </a>

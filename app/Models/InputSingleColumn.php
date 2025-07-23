@@ -8,7 +8,7 @@ class InputSingleColumn extends Model
 {
     protected $guarded = ['id'];
     protected $casts = [
-        'data' => 'array',
+        'data' => 'object',
     ];
 
     // Accessor for convenience
