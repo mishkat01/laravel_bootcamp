@@ -12,8 +12,8 @@ class SingleColumnController extends Controller
      */
     public function index()
     {
-        $categories = InputSingleColumn::all();
-        return view('input_categories_single.index', compact('categories'));
+        $data = InputSingleColumn::all();
+        return view('input_categories_single.index', compact('data'));
     }
 
     /**
