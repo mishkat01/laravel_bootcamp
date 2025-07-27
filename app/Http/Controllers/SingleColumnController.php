@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\InputSingleColumn;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SingleColumnController extends Controller
 {
@@ -21,6 +22,7 @@ class SingleColumnController extends Controller
      */
     public function create()
     {
+
         return view('input_categories_single.create');
     }
 
@@ -29,13 +31,19 @@ class SingleColumnController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = Str::uuid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('categories'), $imageName);
+           
+        }
         $data = [
             'name' => $request->name,
             'description' => $request->description,
             'quantity' => $request->quantity,
             'type' => $request->type,
             'is_active' => $request->is_active ?? true,
-            'image_path' => $request->image_path,
+            'image' => $imageName,
             'available_on' => $request->available_on,
             'available_at' => $request->available_at,
             'available_datetime' => $request->available_datetime,
@@ -44,7 +52,8 @@ class SingleColumnController extends Controller
             'color' => $request->color,
             'password' => bcrypt($request->password),
         ];
-            // dd((object)$data);
+        // dd((object)$data);
+
         InputSingleColumn::create(['value' => $data]);
 
         return redirect()->route('column.index');
@@ -56,7 +65,6 @@ class SingleColumnController extends Controller
     public function show(string $id)
     {
         return view('input_categories_single.show', compact('inputCategory'));
-
     }
 
     /**
@@ -64,7 +72,7 @@ class SingleColumnController extends Controller
      */
     public function edit(string $id)
     {
-           return view('input_categories_single.edit', compact('inputCategory'));
+        return view('input_categories_single.edit', compact('inputCategory'));
     }
 
     /**
@@ -88,8 +96,8 @@ class SingleColumnController extends Controller
      */
     public function destroy(InputSingleColumn $column)
     {
-      
-       $column->delete();
+
+        $column->delete();
         return redirect()->route('column.index');
     }
 }
