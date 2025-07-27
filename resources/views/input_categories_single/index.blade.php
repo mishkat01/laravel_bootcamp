@@ -27,35 +27,36 @@
                     {{-- @dd($data); --}}
                     @foreach ($data as $column)
                         @php
-                            $valueData = ($column->value); // decode as associative array
+                            $columns = ($column->value);
+                            // @dd($column->type)
+                           // decode as associative array
                         @endphp
-                        @foreach ($valueData as $key => $column)
-                            @dd($column);
+                        
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                                 <td class="px-6 py-4 text-gray-900 dark:text-white">
-                                    {{ $column->name }}
+                                    {{ $columns->name }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $column->type }}
+                                    {{ $columns->type }}
                                 </td>
                                 <td class="px-6 py-4">
                                     <span
                                         class="inline-block px-2 py-1 text-xs font-medium rounded 
-                                    {{ $column->is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
-                                        {{ $column->is_active ? 'Yes' : 'No' }}
+                                    {{ $columns->is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                                        {{ $columns->is_active ? 'Yes' : 'No' }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <img src="{{ asset('categories/' . $column->image_path) }}" alt="Your Image"
+                                    <img src="{{ asset('categories/' . $columns->image) }}" alt="Your Image"
                                         width="80px" height="80px" class="rounded">
 
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex space-x-4">
-                                        <a href="{{ route('categories.edit', $column) }}"
+                                         <a href="{{ route('categories.edit', $column) }}"
                                             class="text-blue-600 hover:underline text-sm">Edit</a>
                                         <a href="{{ route('categories.show', $column) }}"
-                                            class="text-blue-600 hover:underline text-sm">Show</a>
+                                            class="text-blue-600 hover:underline text-sm">Show</a> 
 
                                         <form method="POST" action="{{ route('column.destroy', $column) }}"
                                             onsubmit="return confirm('Are you sure?');">
@@ -63,11 +64,11 @@
                                             @method('DELETE')
                                             <button type="submit"
                                                 class="text-red-600 hover:underline text-sm">Delete</button>
-                                        </form>
+                                        </form> 
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                     
                     @endforeach
 
                     @if ($data->isEmpty())
