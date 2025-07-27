@@ -22,7 +22,6 @@ class SingleColumnController extends Controller
      */
     public function create()
     {
-
         return view('input_categories_single.create');
     }
 
@@ -35,7 +34,6 @@ class SingleColumnController extends Controller
             $image = $request->file('image');
             $imageName = Str::uuid() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('categories'), $imageName);
-           
         }
         $data = [
             'name' => $request->name,
@@ -62,31 +60,50 @@ class SingleColumnController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(InputSingleColumn $column)
     {
-        return view('input_categories_single.show', compact('inputCategory'));
+        // dd($column);
+        return view('input_categories_single.show', compact('column'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(InputSingleColumn $column)
     {
-        return view('input_categories_single.edit', compact('inputCategory'));
+        // dd($column);
+        return view('input_categories_single.edit', compact('column'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, InputSingleColumn $inputCategory)
+    public function update(Request $request, InputSingleColumn $column)
     {
+            // dd($request->all());
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = Str::uuid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('categories'), $imageName);
+        }
         $data = [
             'name' => $request->name,
             'description' => $request->description,
-            // include all other fields as in store method
+            'quantity' => $request->quantity,
+            'type' => $request->type,
+            'is_active' => $request->is_active ?? true,
+            'image' => $imageName,
+            'available_on' => $request->available_on,
+            'available_at' => $request->available_at,
+            'available_datetime' => $request->available_datetime,
+            'email' => $request->email,
+            'url' => $request->url,
+            'color' => $request->color,
+            'password' => bcrypt($request->password),
         ];
+           
 
-        $inputCategory->update(['data' => $data]);
+        $column->update(['value' => $data]);
 
         return redirect()->route('column.index');
     }

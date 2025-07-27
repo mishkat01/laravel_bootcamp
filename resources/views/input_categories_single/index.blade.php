@@ -47,15 +47,15 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <img src="{{ asset('categories/' . $columns->image) }}" alt="Your Image"
+                                    <img src="{{ asset('categories/' . $columns->image ?? '') }}" alt="Your Image"
                                         width="80px" height="80px" class="rounded">
 
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex space-x-4">
-                                         <a href="{{ route('categories.edit', $column) }}"
+                                         <a href="{{ route('column.edit', $column) }}"
                                             class="text-blue-600 hover:underline text-sm">Edit</a>
-                                        <a href="{{ route('categories.show', $column) }}"
+                                        <a href="{{ route('column.show', $column) }}"
                                             class="text-blue-600 hover:underline text-sm">Show</a> 
 
                                         <form method="POST" action="{{ route('column.destroy', $column) }}"
