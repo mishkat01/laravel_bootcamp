@@ -133,7 +133,7 @@ class InputCategoryController extends Controller
     {
 
         if ($category->image_path) {
-            Storage::delete($category->image_path);
+                Storage::delete($category->image_path);
         }
         $category->delete();
         return redirect()->route('categories.index')->with('success', 'Deleted.');

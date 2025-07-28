@@ -50,7 +50,6 @@ class SingleColumnController extends Controller
             'color' => $request->color,
             'password' => bcrypt($request->password),
         ];
-        // dd((object)$data);
 
         InputSingleColumn::create(['value' => $data]);
 
@@ -62,7 +61,6 @@ class SingleColumnController extends Controller
      */
     public function show(InputSingleColumn $column)
     {
-        // dd($column);
         return view('input_categories_single.show', compact('column'));
     }
 
@@ -71,7 +69,6 @@ class SingleColumnController extends Controller
      */
     public function edit(InputSingleColumn $column)
     {
-        // dd($column);
         return view('input_categories_single.edit', compact('column'));
     }           
 
@@ -80,8 +77,7 @@ class SingleColumnController extends Controller
      */
     public function update(Request $request, InputSingleColumn $column)
     {
-            // dd($request->all());
-        if ($request->hasFile('image')) {
+      if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = Str::uuid() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('categories'), $imageName);
