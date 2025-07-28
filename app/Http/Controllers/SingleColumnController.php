@@ -73,7 +73,7 @@ class SingleColumnController extends Controller
     {
         // dd($column);
         return view('input_categories_single.edit', compact('column'));
-    }
+    }           
 
     /**
      * Update the specified resource in storage.
