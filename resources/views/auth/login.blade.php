@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('auth.layout.auth-master')
 
-@section('content')
+
 {{-- resources/views/auth/login.blade.php --}}
 {{-- Remove or keep @extends/@section based on layout usage --}}
 <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
@@ -64,4 +64,4 @@
     </div>
 </div>
 
-@endsection
+
